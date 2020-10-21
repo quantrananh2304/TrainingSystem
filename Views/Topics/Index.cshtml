@@ -1,0 +1,81 @@
+﻿@model IEnumerable<TrainingProject.Models.Topic>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@{if (User.IsInRole("Admin"))
+	{
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+    } }
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Topic ID", "Index", new { sortOrder = ViewBag.IDSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Topic Name", "Index", new { sortOrder = ViewBag.TopicSortParm })
+        </th>
+        <th>
+            Topic Description
+        </th>
+        <th>
+            @Html.ActionLink("Course Name", "Index", new { sortOrder = ViewBag.CourseSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Trainer Name", "Index", new { sortOrder = ViewBag.TrainerSortParm })
+        </th>
+        <th></th>
+        @{ if (User.IsInRole("Admin"))
+			{
+                <th></th>
+				}
+			}
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TopicID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TopicName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TopicDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trainer.TrainerName)
+        </td>
+		<td>
+			@Html.ActionLink("Details", "Details", new { id = item.TopicID }, new { @class = "btn btn-primary" })
+		</td>
+        @{ if (User.IsInRole("Admin"))
+			{
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.TopicID }, new { @class = "btn btn-primary" }) 
+            @Html.ActionLink("Delete", "Delete", new { id = item.TopicID }, new { @class = "btn btn-danger" })
+        </td>
+			}
+		}
+    </tr>
+}
+
+</table>

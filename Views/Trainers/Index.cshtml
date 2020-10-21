@@ -1,0 +1,66 @@
+﻿@model IEnumerable<TrainingProject.Models.Trainer>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@{if (User.IsInRole("Admin"))
+	{
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+		} }
+<table class="table">
+    <tr>
+        <th>
+            Trainer Name
+        </th>
+        <th>
+            Working Place
+        </th>
+        <th>
+            Telephone
+        </th>
+        <th>
+            Email
+        </th>
+        <th></th>
+        @{ if (User.IsInRole("Admin")) {
+                <th></th>
+				}
+			}
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrainerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkingPlace)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+		<td>
+			@Html.ActionLink("Details", "Details", new { id = item.TrainerID }, new { @class = "btn btn-primary" })
+		</td>
+        @{ if (User.IsInRole("Admin"))
+			{
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TrainerID }, new { @class = "btn btn-primary" }) 
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TrainerID }, new { @class = "btn btn-danger" })
+                </td>
+				}
+			}
+    </tr>
+}
+
+</table>

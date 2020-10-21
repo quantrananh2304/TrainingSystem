@@ -1,0 +1,45 @@
+﻿@model TrainingProject.Models.Category
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+@{var courses = Model.Courses;}
+
+<div>
+    <h4>Category</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Category Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+
+        <dt>
+            Courses 
+        </dt>
+
+        <dd>
+            @{foreach (var course in courses)
+				{
+                    <div>@course.CourseName</div>            
+				}
+				}
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @{ if (User.IsInRole("Admin"))
+		{
+            @Html.ActionLink("Edit", "Edit", new { id = Model.CategoryID }, new { @class = "btn btn-primary" }) 
+			}
+		}
+    @Html.ActionLink("Back to List", "Index")
+</p>

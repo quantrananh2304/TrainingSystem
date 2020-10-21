@@ -1,0 +1,48 @@
+﻿@model IEnumerable<TrainingProject.Models.Category>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+@{ if (User.IsInRole("Admin"))
+	{
+		<p>
+			@Html.ActionLink("Create New", "Create")
+		</p>
+	}
+}
+<table class="table">
+	<tr>
+		<th>
+			@Html.ActionLink("Category Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+		</th>
+		<th></th>
+		@{ if (User.IsInRole("Admin")) {
+				<th></th>
+			}
+		}
+	</tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.CategoryID }, new { @class = "btn btn-primary" })
+        </td>
+		@{ if (User.IsInRole("Admin"))
+			{
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }, new { @class = "btn btn-primary" }) 
+					@Html.ActionLink("Delete", "Delete", new { id = item.CategoryID }, new { @class = "btn btn-danger" })
+				</td>
+				}
+			}
+    </tr>
+}
+
+</table>

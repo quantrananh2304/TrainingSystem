@@ -1,0 +1,79 @@
+﻿@model TrainingProject.Models.Trainee
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+@*@{var enrollments = Model.Enrollments;}*@ 
+
+<div>
+    <h4>Trainee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Trainee Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TraineeName)
+        </dd>
+
+        <dt>
+            Trainee Age
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TraineeAge)
+        </dd>
+
+        <dt>
+            ProgrammingLanguage
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TraineeProgrammingLanguage)
+        </dd>
+
+        <dt>
+            Trainee D.O.B
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TraineeDoB)
+        </dd>
+
+        <dt>
+            Trainee Phone Number
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TraineePhone)
+        </dd>
+
+        <dt>
+            Trainee Address
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TraineeAddress)
+        </dd>
+
+        @*<dt>
+            Courses Enrolled
+        </dt>
+
+        @{ foreach (var enroll in enrollments) {
+                <dd>
+                    @enroll.EnrollmentID
+                </dd>
+            }
+        }*@
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TraineeID }, new { @class = "btn btn-primary" }) 
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<TrainingProject.Models.Course>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@{if (User.IsInRole("Admin"))
+	{
+<p>
+	@Html.ActionLink("Create New", "Create")
+</p>
+		} }
+@using (Html.BeginForm())
+{
+	<p>
+		Find by name: @Html.TextBox("SearchString")
+		<input type="submit" value="Search" />
+	</p>
+}
+<table class="table">
+	<tr>
+		<th>
+			@Html.ActionLink("ID", "Index", new { sortOrder = ViewBag.IDSortParm })
+		</th>
+		<th>
+			@Html.ActionLink("Course Name", "Index", new { sortOrder = ViewBag.CourseNameSortParm })
+		</th>
+		<th>
+			@Html.ActionLink("Category Name", "Index", new { sortOrder = ViewBag.CatNameSortParm })
+		</th>
+		<th></th>
+		@{ if (User.IsInRole("Admin"))
+			{
+				<th></th>
+			}
+		}
+			</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.CourseID)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CourseName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Category.CategoryName)
+			</td>
+			<td>
+				@Html.ActionLink("Details", "Details", new { id = item.CourseID }, new { @class = "btn btn-primary" })
+			</td>
+			@{ if (User.IsInRole("Admin"))
+				{
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = item.CourseID }, new { @class = "btn btn-primary" })
+					@Html.ActionLink("Delete", "Delete", new { id = item.CourseID }, new { @class = "btn btn-danger" })
+				</td>
+				}
+			}
+		</tr>
+	}
+
+</table>

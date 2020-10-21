@@ -1,0 +1,31 @@
+﻿@model IEnumerable<TrainingProject.Models.Enrollment>
+
+@{
+    ViewBag.Title = "MyCourses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Courses</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Course Name
+        </th>
+        <th>
+            Trainee Name
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trainee.TraineeName)
+        </td>
+    </tr>
+}
+
+</table>

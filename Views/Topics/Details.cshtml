@@ -1,0 +1,54 @@
+﻿@model TrainingProject.Models.Topic
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Topic</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Topic Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TopicName)
+        </dd>
+
+        <dt>
+            Topic Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TopicDescription)
+        </dd>
+
+        <dt>
+            Course
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.CourseName)
+        </dd>
+
+        <dt>
+            Trainer
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trainer.TrainerName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @{ if (User.IsInRole("Admin"))
+		{
+            @Html.ActionLink("Edit", "Edit", new { id = Model.TopicID }, new { @class = "btn btn-primary" }) 
+			} }
+    @Html.ActionLink("Back to List", "Index")
+</p>

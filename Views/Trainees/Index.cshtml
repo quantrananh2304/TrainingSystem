@@ -1,0 +1,78 @@
+﻿@model IEnumerable<TrainingProject.Models.Trainee>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@{if (User.IsInRole("Admin"))
+	{
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+		} }
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Trainee", "Index", new { sortOrder = ViewBag.TraineeSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Age", "Index", new { sortOrder = ViewBag.AgeSortParm })
+        </th>
+        <th>
+            Programming Language
+        </th>
+        <th>
+            D.O.B
+        </th>
+        <th>
+            Phone Number
+        </th>
+        <th>
+            @Html.ActionLink("Address", "Index", new { sortOrder = ViewBag.AddressSortParm })
+        </th>
+        <th></th>
+        @{ if (User.IsInRole("Admin")) {
+                <th></th>
+				}
+			}
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TraineeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TraineeAge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TraineeProgrammingLanguage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TraineeDoB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TraineePhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TraineeAddress)
+        </td>
+		<td>
+			@Html.ActionLink("Details", "Details", new { id = item.TraineeID }, new { @class = "btn btn-primary" })
+		</td>
+        @{ if (User.IsInRole("Admin"))
+			{
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TraineeID }, new { @class = "btn btn-primary" })  
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TraineeID }, new { @class = "btn btn-danger" })
+                </td>
+				}
+			}
+    </tr>
+}
+
+</table>
